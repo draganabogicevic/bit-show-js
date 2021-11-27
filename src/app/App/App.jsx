@@ -4,7 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../Home/Home";
 import Show from "../Show/Show";
 import About from "../About/About"
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer/Footer"
 
 import { ChakraProvider } from "@chakra-ui/react";
 import './App.css';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/:id" element={<Show />}/>
         <Route path="/about" element={<About />}/>
       </Routes>
+      <Footer />
     </ChakraProvider>
   );
 }
