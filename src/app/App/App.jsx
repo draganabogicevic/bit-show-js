@@ -7,6 +7,7 @@ import About from "../About/About"
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer/Footer"
 
+
 import { ChakraProvider } from "@chakra-ui/react";
 import './App.css';
 

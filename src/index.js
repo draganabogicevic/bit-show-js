@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import SearchContextProvider from "./context/search-context";
 
 import App from './app/App/App';
 import './index.css';
@@ -9,7 +10,9 @@ import './index.css';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <SearchContextProvider>
+      <App />
+    </SearchContextProvider>  
   </BrowserRouter>,
   document.getElementById('root')
 );

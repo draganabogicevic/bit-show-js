@@ -1,8 +1,8 @@
 export default class Show {
-  constructor({id, name, photo, rating}) {
+  constructor({id, name, image, rating}) {
     this.id = id
     this.name = name
-    this.photo = photo
+    this.image = image
     this.rating = rating
   }
 }
