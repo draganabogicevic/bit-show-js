@@ -11,10 +11,6 @@ const FavShows = () => {
   const [bookmarked, setBookmarked] = useState([]);
   const bookmarkContext = useContext(BookmarkContext);
 
-  // useEffect(() => {
-  //   setInitFavShows(BookmarkContext.get)
-  // }, [])
-
   useEffect(() => {
     // @ts-ignore
     setBookmarked(bookmarkContext.bookmarked);

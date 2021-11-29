@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import {Heading, Box, Center, Image, Flex, useColorModeValue, Spacer } from '@chakra-ui/react';
-
+import { Icon } from "@chakra-ui/react";
+import { BsBookmarkFill } from "react-icons/bs";
 
 const Card = ({show}) => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  // const [bookMarkedShow, setBookMarkedShow] = useState();
+  // const bookmarkContext = useContext(BookmarkContext);
+
+  const toggleBookmarked = () => {
+    setIsBookmarked(!isBookmarked);
+  }
+
+  // const setBookmarked = () => {
+  //   if(isBookmarked) {
+  //     setBookMarkedShow(show);
+  //     // @ts-ignore
+  //     bookmarkContext.bookmarkHandler(show);
+  //   }
+  // }
+
+  // useEffect (() => {
+  //   setBookmarked();
+  // }, [isBookmarked])
+
   
   return (
     <Center py={6} mb="50px">
@@ -23,6 +44,13 @@ const Card = ({show}) => {
           />
         </Link>  
         <Flex>
+          <Box
+            // @ts-ignore
+            onClick={toggleBookmarked}
+          >
+           <Icon as={BsBookmarkFill}/>
+          </Box> 
+          <Spacer />
           <Box
             mt={-3}
             mr={30}

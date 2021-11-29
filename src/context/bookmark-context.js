@@ -16,25 +16,30 @@ export const BookmarkContextProvider = (props) => {
   console.log(bookmarked)
 
   const bookmarkHandler = (selected) => {
-    if(bookmarked.map(s => s.id !== selected.id)) {
-    setBookmarked(bookmarked.concat(selected));
+    console.log(selected)
+    console.log(bookmarked) 
+    bookmarked.forEach(element => {
+      if(element.id !== selected.id) {
+      setBookmarked(bookmarked.concat(selected));
     } else {
       setBookmarked(bookmarked);
-    } 
+    }
+  })
   }
 
   const saveToLocalStorage = () => {
     localStorage.setItem("favShows", JSON.stringify(bookmarked));
   }
+
   function getLocalStorage() {
     const ls = JSON.parse(localStorage.getItem("favShows"));
     console.log(ls)
     return ls;
   }
-  
+
   const clearBookmarked = () => {
     saveToLocalStorage();
-    // setBookmarked([]);
+    //setBookmarked([]);
   }
 
   return (
