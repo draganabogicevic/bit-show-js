@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { SearchContext } from "../../context/search-context";
 
 import Search from "../../components/Search";
@@ -18,6 +17,7 @@ const Home = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const searchContext = useContext(SearchContext);
+
 
   useEffect (() => {
     ShowCommunicator.getAllShows()
@@ -50,9 +50,7 @@ const Home = () => {
         <SimpleGrid columns={[1, 2, 3]}>
           {filteredShows.slice(0, 50).map(s => (
           <Box w="100%" key={s.id}>
-            <Link to={`/${s.id}`}>
-              <Card show={s} />
-            </Link>   
+            <Card show={s} />
           </Box>
           ))}
         </SimpleGrid>

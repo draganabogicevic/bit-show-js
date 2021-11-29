@@ -19,6 +19,9 @@ const Navbar = () => {
           </Flex>
           <Flex alignItems={'center'}>
             <Menu>
+            <Link to="/favShows">
+              <MenuButton px={4}>Favourite Shows</MenuButton>
+            </Link>
             <Link to="/about">
               <MenuButton px={4}>About</MenuButton>
             </Link>

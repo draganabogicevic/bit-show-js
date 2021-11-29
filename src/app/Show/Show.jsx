@@ -9,9 +9,10 @@ import ShowDetails from "../../components/ShowDetails";
 import ShowCrewInGrid from "../../components/ShowCrewInGrid";
 import ShowCrewInListView from "../../components/ShowCrewInListView";
 
+
 import { Box, Spacer, Flex, List, SimpleGrid } from "@chakra-ui/react";
-import { Icon } from "@chakra-ui/react"
-import { BsFillGrid3X2GapFill, BsListUl  } from "react-icons/bs";
+import { Icon } from "@chakra-ui/react";
+import { BsFillGrid3X2GapFill, BsListUl } from "react-icons/bs";
 
 
 const Show = () => {
