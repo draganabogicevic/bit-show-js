@@ -6,6 +6,19 @@ export const fetchShows = async () => {
   return (await response).data;
 }
 
+export const fetchSingleShow = async (path) => {
+  // @ts-ignore
+  const response = Api.get(path);
+  return (await response).data;
+}
+
+export const fetchShowCrew = async (path) => {
+  // @ts-ignore
+  const response = Api.get(path);
+  return (await response).data;
+}
+
+
 
 
 

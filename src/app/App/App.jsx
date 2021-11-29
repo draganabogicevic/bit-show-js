@@ -5,16 +5,17 @@ import Home from "../Home/Home";
 import Show from "../Show/Show";
 import About from "../About/About"
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer";
+import ErrorBoundary from '../../components/ErrorBoundary';
+
 
 
 import { ChakraProvider } from "@chakra-ui/react";
 import './App.css';
 
-
-
-function App() {
+const App = () => {
   return (
+  <ErrorBoundary>
     <ChakraProvider>
       <Navbar />
       <Routes>
@@ -24,6 +25,7 @@ function App() {
       </Routes>
       <Footer />
     </ChakraProvider>
+  </ErrorBoundary>   
   );
 }
 
