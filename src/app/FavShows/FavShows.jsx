@@ -7,10 +7,16 @@ import ErrorDisplay from "../../components/ErrorDisplay";
 import { Box, SimpleGrid  } from "@chakra-ui/react";
 
 const FavShows = () => {
+  // const [initFavShows, setInitFavShows] = useState([]);
   const [bookmarked, setBookmarked] = useState([]);
   const bookmarkContext = useContext(BookmarkContext);
 
+  // useEffect(() => {
+  //   setInitFavShows(BookmarkContext.get)
+  // }, [])
+
   useEffect(() => {
+    // @ts-ignore
     setBookmarked(bookmarkContext.bookmarked);
   }, [bookmarkContext.bookmarked])
 
