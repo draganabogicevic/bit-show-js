@@ -26,7 +26,7 @@ const FavShows = () => {
 
   return (
     <Box w="70%" m="auto">
-      {(bookmarked !== null && bookmarked.length >= 1 )? (
+      {(bookmarked !== null && bookmarked.length > 1 )? (
         <SimpleGrid columns={[1, 2, 3]}>
           {bookmarked.map((s, index) => (
           <Box w="100%" key={index}>
