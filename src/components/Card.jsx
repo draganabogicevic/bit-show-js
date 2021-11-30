@@ -21,8 +21,10 @@ const Card = ({show}) => {
       setBookMarkedShow(show);
       // @ts-ignore
       bookmarkContext.bookmarkHandler(show);
-    } 
+    }
   }
+
+  
 
   useEffect (() => {
     setBookmarked();

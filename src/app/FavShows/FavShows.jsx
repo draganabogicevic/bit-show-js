@@ -14,12 +14,15 @@ const FavShows = () => {
     setBookmarked(bookmarkContext.bookmarked);
   }, [bookmarkContext.bookmarked])
 
-  useEffect(() =>{
+  useEffect(() => {
     return function () {
       setBookmarked([]);
       bookmarkContext.clearBookmarked();
     }
   }, [])
+
+  
+  console.log(bookmarked)
 
   return (
     <Box w="70%" m="auto">
