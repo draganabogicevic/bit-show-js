@@ -22,7 +22,7 @@ const FavShows = () => {
   }, [])
 
   
-  console.log(bookmarked)
+  console.log(bookmarkContext.bookmarked)
 
   return (
     <Box w="70%" m="auto">
