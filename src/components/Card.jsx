@@ -49,7 +49,6 @@ const Card = ({show}) => {
         </Link>  
         <Flex>
           <Box
-            // @ts-ignore
             onClick={toggleBookmarked}
           >
            {isBookmarked? <Icon as={BsBookmarkFill}/> : <Icon as={BsBookmark}/>}

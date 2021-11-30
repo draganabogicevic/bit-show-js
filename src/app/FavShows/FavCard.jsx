@@ -44,9 +44,8 @@ const FavCard = ({show}) => {
         </Link>  
         <Flex>
         <Box
-            // @ts-ignore
-            onClick={toggleBookmarked}
-          >
+          onClick={toggleBookmarked}
+        >
            {isBookmarked? <Icon as={BsBookmarkFill}/> : <Icon as={BsBookmark}/>}
           </Box>
           <Spacer />

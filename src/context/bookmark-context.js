@@ -59,7 +59,6 @@ const BookmarkContextProvider = (props) => {
 
   return (
     <BookmarkContext.Provider
-      // @ts-ignore
       value = {{bookmarked:bookmarked, bookmarkHandler:bookmarkHandler, clearBookmarked: clearBookmarked, removeBookmarkHandler: removeBookmarkHandler }}
     >
       {props.children}
