@@ -22,12 +22,14 @@ const BookmarkContextProvider = (props) => {
   
   const selectedIsDifferent = (selected) => {
     let isDifferent = true;
-    for(let i = 0; i<bookmarked.length; i++) {
-      let current = bookmarked[i].id;
-      if(current === selected.id) {
-      isDifferent = false;
-    } 
-   }
+    if((bookmarked != null && bookmarked.length < 1)) {
+      for(let i = 0; i<bookmarked.length; i++) {
+        let current = bookmarked[i].id;
+          if(current === selected.id) {
+          isDifferent = false;
+          } 
+      }
+    }
     return isDifferent;
   }
   
