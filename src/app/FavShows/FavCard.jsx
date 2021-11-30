@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { BookmarkContext } from "../../context/bookmark-context";
 
 import {Heading, Box, Center, Image, Flex, useColorModeValue, Spacer } from '@chakra-ui/react';
+import { Icon } from "@chakra-ui/react";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 
-const Card = ({show}) => {
+const FavCard = ({show}) => {
+  const [isBookmarked, setIsBookmarked] = useState(true);
+  const bookmarkContext = useContext(BookmarkContext);
+
+  // const onRemoveBookmark = () => {
+  //   if(!isBookmarked) {
+  //     // @ts-ignore
+  //     bookmarkContext.removeBookmarkHandler(show)
+  //   }
+  // }
+
+  useEffect(() => {
+    // onRemoveBookmark();
+  }, [isBookmarked]);
+
+  const toggleBookmarked = () => {
+    setIsBookmarked(!isBookmarked);
+  } 
 
   return (
     <Center py={6} mb="50px">
@@ -23,6 +43,13 @@ const Card = ({show}) => {
           />
         </Link>  
         <Flex>
+        <Box
+            // @ts-ignore
+            onClick={toggleBookmarked}
+          >
+           {isBookmarked? <Icon as={BsBookmarkFill}/> : <Icon as={BsBookmark}/>}
+          </Box>
+          <Spacer />
           <Box
             mt={-3}
             mr={30}
@@ -47,4 +74,4 @@ const Card = ({show}) => {
   );
 }
 
-export default Card; 
+export default FavCard; 
