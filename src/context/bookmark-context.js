@@ -22,7 +22,7 @@ const BookmarkContextProvider = (props) => {
   
   const selectedIsDifferent = (selected) => {
     let isDifferent = true;
-    if((bookmarked != null && bookmarked.length > 1)) {
+    if((bookmarked != null && bookmarked.length >= 1)) {
       for(let i = 0; i<bookmarked.length; i++) {
         let current = bookmarked[i].id;
           if(current === selected.id) {
@@ -34,7 +34,7 @@ const BookmarkContextProvider = (props) => {
   }
   
   const bookmarkHandler = (selected) => {
-    if((bookmarked != null && bookmarked.length > 1)) {
+    if((bookmarked != null && bookmarked.length >= 1)) {
       if(selectedIsDifferent(selected)) {
         setBookmarked(bookmarked.concat(selected))
       }
