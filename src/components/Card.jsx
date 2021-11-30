@@ -24,7 +24,6 @@ const Card = ({show}) => {
     } 
   }
 
-
   useEffect (() => {
     setBookmarked();
   }, [isBookmarked])

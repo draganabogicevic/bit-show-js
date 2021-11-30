@@ -10,14 +10,43 @@ import FallbackUI from "../../components/FallbackUI";
 import ShowCommunicator from "../../service/ShowCommunicator"
 
 import { Box, SimpleGrid  } from "@chakra-ui/react";
+import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
+// import {
+//   Pagination,
+//   usePagination,
+//   PaginationNext,
+//   PaginationPage,
+//   PaginationPrevious,
+//   PaginationContainer,
+//   PaginationPageGroup,
+// } from "@ajna/pagination";
 
 
 const Home = () => {
+  // const [pagesQuantity, setPagesQuantity] = useState(0);
+  // const [curPage, setCurPage] = useState(0);
   const [shows, setShows] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const searchContext = useContext(SearchContext);
+  // const itemLimit = 9;
 
+  // const normalStyles = {
+  //   bg: "white",
+  // }
+  // const activeStyles = {
+  //   bg: "blue.300",
+  // }
+
+  // // @ts-ignore
+  // const handlePageChange = (page) => {
+  //   setCurPage(page)
+  // }
+
+  // useEffect(() => {
+  //   const pagesTotal = Math.ceil(shows.length / itemLimit);
+  //   setPagesQuantity(pagesTotal)
+  // }, [shows.length])
 
   useEffect (() => {
     ShowCommunicator.getAllShows()
@@ -50,11 +79,35 @@ const Home = () => {
         <SimpleGrid columns={[1, 2, 3]}>
           {filteredShows.slice(0, 50).map(s => (
           <Box w="100%" key={s.id}>
-            <Card show={s} />
+            <Card 
+              show={s} 
+              // // @ts-ignore
+              // curPage={curPage} 
+              // itemLimit={itemLimit}
+            />
           </Box>
           ))}
         </SimpleGrid>
       ) : <ErrorDisplay message="No matching result" />}
+        {/* <Pagination
+          onPageChange={handlePageChange}
+          // @ts-ignore
+          pagesQuantity={pagesQuantity-1}        
+        >
+          <PaginationPrevious bg="white">
+            <CgChevronLeft />
+          </PaginationPrevious> */}
+          {/* <PaginationPageGroup>
+          {generatePages(pagesQuantity)?.map((page) => (
+              <PaginationPage
+                key={`paginator_page_${page}`}
+                page={page}
+                normalStyles={normalStyles}
+                activeStyles={activeStyles}
+              />
+            ))}
+          </PaginationPageGroup> */}
+        {/* </Pagination> */}
     </Box>
   )
 }

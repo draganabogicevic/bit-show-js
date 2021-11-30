@@ -6,50 +6,58 @@ export const BookmarkContext = React.createContext({
   clearBookmarked: () => {}, 
 });
 
-export const BookmarkContextProvider = (props) => {
+const BookmarkContextProvider = (props) => {
   const [bookmarked, setBookmarked] = useState([]);
 
-  useEffect (() => {
-    setBookmarked(getLocalStorage())
-  }, [])
+  // function getLocalStorage() {
+  //   const ls = JSON.parse(localStorage.getItem("favShows"));
+  //   console.log(ls)
+  //   return ls;
+  // }
 
-  console.log(bookmarked)
+  // useEffect (() => {
+  //   setBookmarked(getLocalStorage())
+  // }, [])
+  
+  // const selectedIsDifferent = (selected) => {
+  //   let isDifferent = true;
+  //   for(let i = 0; i<bookmarked.length; i++) {
+  //     let current = bookmarked[i].id;
+  //     if(current === selected.id) {
+  //     isDifferent = false;
+  //   } 
+  //   return isDifferent;
+  //  }
+  // }
+  
+  // const bookmarkHandler = (selected) => {
+  //   if(selectedIsDifferent(selected)) {
+  //     setBookmarked(bookmarked.concat(selected))
+  //   }
+  // }
+  // console.log(bookmarked)
+  // const saveToLocalStorage = () => {
+  //   localStorage.setItem("favShows", JSON.stringify(bookmarked));
+  // }
 
   const bookmarkHandler = (selected) => {
-    console.log(selected)
-    console.log(bookmarked) 
-    bookmarked.forEach(element => {
-      if(element.id !== selected.id) {
-      setBookmarked(bookmarked.concat(selected));
-    } else {
-      setBookmarked(bookmarked);
-    }
-  })
-  }
-
-  const saveToLocalStorage = () => {
-    localStorage.setItem("favShows", JSON.stringify(bookmarked));
-  }
-
-  function getLocalStorage() {
-    const ls = JSON.parse(localStorage.getItem("favShows"));
-    console.log(ls)
-    return ls;
+    if(bookmarked.map(s => s.id !== selected.id)) {
+    setBookmarked(bookmarked.concat(selected));
+    }    
   }
 
   const clearBookmarked = () => {
-    saveToLocalStorage();
-    //setBookmarked([]);
+    // saveToLocalStorage();
+    setBookmarked([]);
   }
 
   return (
     <BookmarkContext.Provider
       // @ts-ignore
-      value = {{bookmarked:bookmarked, bookmarkHandler:bookmarkHandler, clearBookmarked: clearBookmarked, getLocalStorage: getLocalStorage }}
+      value = {{bookmarked:bookmarked, bookmarkHandler:bookmarkHandler, clearBookmarked: clearBookmarked }}
     >
       {props.children}
     </BookmarkContext.Provider>  
   )
 }
-
 export default BookmarkContextProvider;
