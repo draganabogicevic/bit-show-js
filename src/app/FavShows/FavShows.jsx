@@ -4,7 +4,7 @@ import { BookmarkContext } from "../../context/bookmark-context";
 import FavCard from "./FavCard";
 import ErrorDisplay from "../../components/ErrorDisplay";
 
-import { Box, SimpleGrid  } from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading  } from "@chakra-ui/react";
 
 const FavShows = () => {
   const [bookmarked, setBookmarked] = useState([]);
@@ -26,7 +26,8 @@ const FavShows = () => {
 
   return (
     <Box w="70%" m="auto">
-      {(bookmarked !== null && bookmarked.length > 1 )? (
+      <Heading my="30px">My favorite</Heading>
+      {(bookmarked !== null && bookmarked.length >= 1 )? (
         <SimpleGrid columns={[1, 2, 3]}>
           {bookmarked.map((s, index) => (
           <Box w="100%" key={index}>
