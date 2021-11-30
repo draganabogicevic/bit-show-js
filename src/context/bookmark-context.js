@@ -19,9 +19,7 @@ const BookmarkContextProvider = (props) => {
 
 
   useEffect (() => {
-    if(getLocalStorage() != null && getLocalStorage().length >= 1) {
-      setBookmarked(getLocalStorage())
-    }  
+    setBookmarked(getLocalStorage())
   }, [])
   
   const selectedIsDifferent = (selected) => {

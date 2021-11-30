@@ -9,7 +9,7 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 const Card = ({show}) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [bookMarkedShow, setBookMarkedShow] = useState();
+  // const [bookMarkedShow, setBookMarkedShow] = useState();
   const bookmarkContext = useContext(BookmarkContext);
 
   const toggleBookmarked = () => {
@@ -18,12 +18,12 @@ const Card = ({show}) => {
 
   const setBookmarked = () => {
     if(isBookmarked) {
-      setBookMarkedShow(show);
-      // @ts-ignore
+      // setBookMarkedShow(show);
       bookmarkContext.bookmarkHandler(show);
     }
   }
 
+  console.log(bookmarkContext.bookmarked)
   
 
   useEffect (() => {
