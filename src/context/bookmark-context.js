@@ -12,15 +12,14 @@ const BookmarkContextProvider = (props) => {
 
   function getLocalStorage() {
     const ls = JSON.parse(localStorage.getItem("favShows"));
-    console.log(ls)
     return ls;
   }
 
 
 
-  useEffect (() => {
-    setBookmarked(getLocalStorage())
-  }, [])
+  // useEffect (() => {
+  //   setBookmarked(getLocalStorage())
+  // }, [])
   
   const selectedIsDifferent = (selected) => {
     let isDifferent = true;
