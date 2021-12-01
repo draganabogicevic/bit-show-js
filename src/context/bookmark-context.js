@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const BookmarkContext = React.createContext({
   bookmarked: [],
@@ -6,16 +6,20 @@ export const BookmarkContext = React.createContext({
 });
 
 const BookmarkContextProvider = (props) => {
-  const [bookmarked, setBookmarked] = useState([]);
+  const [bookmarked, setBookmarked] = useState(JSON.parse(localStorage.getItem("favShows")));
 
   const bookmarkHandler = (items) => {
     setBookmarked(items);
   }
 
-  // const saveToLs = (data) => {
-  //   const dataForLs = JSON.stringify(data);
-  //   localStorage.setItem("favShows", dataForLs);
-  // }
+  const saveToLocalStorage = (bookmarked) => {
+    localStorage.setItem("favShows", JSON.stringify(bookmarked));
+  }
+
+  useEffect(() => {
+      saveToLocalStorage(bookmarked);
+    }, [bookmarked])
+  
  
   return (
     <BookmarkContext.Provider

@@ -25,12 +25,12 @@ import { Box, SimpleGrid  } from "@chakra-ui/react";
 
 const Home = () => {
   const bookmarkContext = useContext(BookmarkContext);
-  const [bookmarked, setBookmarked] = useState([]);
+  const [bookmarked, setBookmarked] = useState(JSON.parse(localStorage.getItem("favShows")));
   const [shows, setShows] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const searchContext = useContext(SearchContext);
-  console.log(bookmarked);
+  
   // const [pagesQuantity, setPagesQuantity] = useState(0);
   // const [curPage, setCurPage] = useState(0);
   // const itemLimit = 9;
@@ -52,7 +52,29 @@ const Home = () => {
   //   setPagesQuantity(pagesTotal)
   // }, [shows.length])
 
+  // const isBookmarkedInitially = () => {
+  //   if(bookmarked) {
+  //    if(bookmarked.forEach(s => s.id === show.id)) {
+  //      show.bookmarked = true;
+  //    }
+  //   }
+  // }
 
+  // const isBookmarkedInitially = () => {
+  //   // const initBookmarked = [];
+  //   if(bookmarked) {
+  //     bookmarked.forEach(b => {
+  //       const initbookmarked = shows.find(s => (s.id === b.id))
+  //       initbookmarked.bookmarked = true;
+  //       console.log(initbookmarked)    
+  //     }); 
+  //   }
+  // }  
+ 
+
+  // useEffect(() => {
+  
+  // }, [shows])
   
   const handleBookmarkClick = (showId) => {
     const selectedShow = shows.find((s => s.id === showId));
@@ -76,16 +98,24 @@ const Home = () => {
     bookmarkContext.bookmarkHandler(bookmarked);
   }, [bookmarked])
   
-
+  
   useEffect (() => {
     ShowCommunicator.getAllShows()
-    .then(data => setShows(data))
+    .then(data => {
+      if(bookmarked) {
+        bookmarked.forEach(b => {
+          const initbookmarked = data.find(s => (s.id === b.id))
+          initbookmarked.bookmarked = true;   
+        }); 
+      }
+      setShows(data)
+    })
     .catch(error => {
       setError(error.message);
     }).finally(() => {
       setLoading(false);
       }
-    ) 
+    )
   }, []);
  
 

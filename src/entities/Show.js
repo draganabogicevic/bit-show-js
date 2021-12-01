@@ -6,7 +6,7 @@ export default class Show {
     this.rating = rating
     this.genres = genres
     this.summary = summary
-    this.bookmarked = false;
+    // this.bookmarked = false;
   }
   toggleBookmark() {
     this.bookmarked = !this.bookmarked;
