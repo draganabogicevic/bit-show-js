@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import {Heading, Box, Center, Image, Flex, useColorModeValue, Spacer } from '@chakra-ui/react';
@@ -6,7 +6,6 @@ import { Icon } from "@chakra-ui/react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 const Card = ({show, onBookmark }) => {
-
 
   return (
     

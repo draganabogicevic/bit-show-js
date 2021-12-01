@@ -12,23 +12,18 @@ const FavShows = () => {
   
   const handleUnBookmark = (showId) => {
     const selectedShow = bookmarked.find(s => s.id === showId);
-    selectedShow.toggleBookmark();
     setBookmarked(prevBookmarked => {
       return prevBookmarked.filter(s => s.id !== selectedShow.id);
     }) 
   }
+  
+
 
   useEffect(() => {
     bookmarkContext.bookmarkHandler(bookmarked)
   }, [bookmarked])
 
-  useEffect(() => {
-    return function () {
-      // setBookmarked([]);
-      // bookmarkContext.clearBookmarked();
-    }
-  }, [])
-
+  
  
   return (
     <Box w="70%" m="auto">
