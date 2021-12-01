@@ -88,7 +88,7 @@ const Home = () => {
     setBookmarked((prevBookmarked) => {
       return (
         selectedShow.bookmarked ?
-          [...prevBookmarked, selectedShow] :
+          prevBookmarked.concat(selectedShow) :
           prevBookmarked.filter(s => s.id !== selectedShow.id)
       );
     });
