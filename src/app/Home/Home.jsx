@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SearchContext } from "../../context/search-context";
 
 import Search from "../../components/Search";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import ErrorDisplay from "../../components/ErrorDisplay";
 import FallbackUI from "../../components/FallbackUI";
+import { SearchContext } from "../../context/search-context";
+import { BookmarkContext } from "../../context/bookmark-context";
 
 import ShowCommunicator from "../../service/ShowCommunicator"
 
 import { Box, SimpleGrid  } from "@chakra-ui/react";
-import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
+// import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
 // import {
 //   Pagination,
 //   usePagination,
@@ -23,12 +24,15 @@ import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
 
 
 const Home = () => {
-  // const [pagesQuantity, setPagesQuantity] = useState(0);
-  // const [curPage, setCurPage] = useState(0);
+  const bookmarkContext = useContext(BookmarkContext);
+  const [bookmarked, setBookmarked] = useState([]);
   const [shows, setShows] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const searchContext = useContext(SearchContext);
+  console.log(bookmarked);
+  // const [pagesQuantity, setPagesQuantity] = useState(0);
+  // const [curPage, setCurPage] = useState(0);
   // const itemLimit = 9;
 
   // const normalStyles = {
@@ -48,6 +52,31 @@ const Home = () => {
   //   setPagesQuantity(pagesTotal)
   // }, [shows.length])
 
+
+  
+  const handleBookmarkClick = (showId) => {
+    const selectedShow = shows.find((s => s.id === showId));
+    console.assert(selectedShow);
+    selectedShow.toggleBookmark();
+    setShows((prevShows) => {
+      return prevShows.map((s) => {
+        return s.id === showId ? selectedShow : s;
+      });
+    });
+    setBookmarked((prevBookmarked) => {
+      return (
+        selectedShow.bookmarked ?
+          [...prevBookmarked, selectedShow] :
+          prevBookmarked.filter(s => s.id !== selectedShow.id)
+      );
+    });
+  };
+
+  useEffect(() => {
+    bookmarkContext.bookmarkHandler(bookmarked);
+  }, [bookmarked])
+  
+
   useEffect (() => {
     ShowCommunicator.getAllShows()
     .then(data => setShows(data))
@@ -58,6 +87,7 @@ const Home = () => {
       }
     ) 
   }, []);
+ 
 
   let filteredShows;
   if(searchContext.query !== "") {
@@ -80,7 +110,8 @@ const Home = () => {
           {filteredShows.slice(0, 50).map(s => (
           <Box w="100%" key={s.id}>
             <Card 
-              show={s} 
+              show={s}
+              onBookmark={handleBookmarkClick}
               // // @ts-ignore
               // curPage={curPage} 
               // itemLimit={itemLimit}

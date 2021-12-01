@@ -7,23 +7,29 @@ import ErrorDisplay from "../../components/ErrorDisplay";
 import { Box, SimpleGrid, Heading  } from "@chakra-ui/react";
 
 const FavShows = () => {
-  const [bookmarked, setBookmarked] = useState([]);
   const bookmarkContext = useContext(BookmarkContext);
+  const [bookmarked, setBookmarked] = useState(bookmarkContext.bookmarked);
+  
+  const handleUnBookmark = (showId) => {
+    const selectedShow = bookmarked.find(s => s.id === showId);
+    selectedShow.toggleBookmark();
+    setBookmarked(prevBookmarked => {
+      return prevBookmarked.filter(s => s.id !== selectedShow.id);
+    }) 
+  }
 
   useEffect(() => {
-    setBookmarked(bookmarkContext.bookmarked);
-  }, [bookmarkContext.bookmarked])
+    bookmarkContext.bookmarkHandler(bookmarked)
+  }, [bookmarked])
 
   useEffect(() => {
     return function () {
-      setBookmarked([]);
-      bookmarkContext.clearBookmarked();
+      // setBookmarked([]);
+      // bookmarkContext.clearBookmarked();
     }
   }, [])
 
-  
-  console.log(bookmarkContext.bookmarked)
-
+ 
   return (
     <Box w="70%" m="auto">
       <Heading my="30px">My favorite</Heading>
@@ -31,7 +37,7 @@ const FavShows = () => {
         <SimpleGrid columns={[1, 2, 3]}>
           {bookmarked.map((s, index) => (
           <Box w="100%" key={index}>
-            <FavCard show={s} key={s.id}/>
+            <FavCard show={s} key={s.id} onUnBookmark={handleUnBookmark}/>
           </Box>
           ))}
         </SimpleGrid>

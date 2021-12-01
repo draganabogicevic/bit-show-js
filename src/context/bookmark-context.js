@@ -1,64 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export const BookmarkContext = React.createContext({
   bookmarked: [],
-  bookmarkHandler: () => {},
-  removeBookmarkHandler: () => {},
-  clearBookmarked: () => {}, 
+  bookmarkHandler: (prop) => {},
 });
 
 const BookmarkContextProvider = (props) => {
   const [bookmarked, setBookmarked] = useState([]);
 
-  function getLocalStorage() {
-    const ls = JSON.parse(localStorage.getItem("favShows"));
-    return ls;
+  const bookmarkHandler = (items) => {
+    setBookmarked(items);
   }
 
-
-
-  // useEffect (() => {
-  //   setBookmarked(getLocalStorage())
-  // }, [])
-  
-  const selectedIsDifferent = (selected) => {
-    let isDifferent = true;
-    if((bookmarked != null && bookmarked.length >= 1)) {
-      for(let i = 0; i<bookmarked.length; i++) {
-        let current = bookmarked[i].id;
-          if(current === selected.id) {
-          isDifferent = false;
-          } 
-      }
-    }
-    return isDifferent;
-  }
-  
-  const bookmarkHandler = (selected) => {
-    if((bookmarked != null && bookmarked.length >= 1)) {
-      if(selectedIsDifferent(selected)) {
-        setBookmarked(bookmarked.concat(selected))
-      }
-    }
-  }
-
-  const removeBookmarkHandler = (selected) => {
-      setBookmarked(bookmarked.filter(selected))
-  }
-
-  const saveToLocalStorage = () => {
-    localStorage.setItem("favShows", JSON.stringify(bookmarked));
-  }
-
-
-  const clearBookmarked = () => {
-    saveToLocalStorage();
-    // setBookmarked([]);
-  }
-
+  // const saveToLs = (data) => {
+  //   const dataForLs = JSON.stringify(data);
+  //   localStorage.setItem("favShows", dataForLs);
+  // }
+ 
   return (
     <BookmarkContext.Provider
-      value = {{bookmarked:bookmarked, bookmarkHandler:bookmarkHandler, clearBookmarked: clearBookmarked, removeBookmarkHandler: removeBookmarkHandler }}
+      value = {{bookmarked:bookmarked, bookmarkHandler:bookmarkHandler }}
     >
       {props.children}
     </BookmarkContext.Provider>  
