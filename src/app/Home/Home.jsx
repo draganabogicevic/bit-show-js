@@ -86,11 +86,12 @@ const Home = () => {
       });
     });
     setBookmarked((prevBookmarked) => {
+      if(prevBookmarked !== null && prevBookmarked.length >=1) {
       return (
         selectedShow.bookmarked ?
           prevBookmarked.concat(selectedShow) :
           prevBookmarked.filter(s => s.id !== selectedShow.id)
-      );
+      )};
     });
   };
 
