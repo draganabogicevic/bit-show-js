@@ -6,8 +6,13 @@ export const BookmarkContext = React.createContext({
 });
 
 const BookmarkContextProvider = (props) => {
-  const [bookmarked, setBookmarked] = useState(JSON.parse(localStorage.getItem("favShows")));
+  const [bookmarked, setBookmarked] = useState([]);
 
+  useEffect(() => {
+    if(localStorage.getItem("favShows")) {
+      setBookmarked(JSON.parse(localStorage.getItem("favShows")));
+    } 
+  }, [])
   const bookmarkHandler = (items) => {
     setBookmarked(items);
   }
