@@ -25,7 +25,7 @@ import { Box, SimpleGrid  } from "@chakra-ui/react";
 
 const Home = () => {
   const bookmarkContext = useContext(BookmarkContext);
-  const [bookmarked, setBookmarked] = useState(JSON.parse(localStorage.getItem("favShows")));
+  const [bookmarked, setBookmarked] = useState(bookmarkContext.bookmarked);
   const [shows, setShows] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -60,21 +60,7 @@ const Home = () => {
   //   }
   // }
 
-  // const isBookmarkedInitially = () => {
-  //   // const initBookmarked = [];
-  //   if(bookmarked) {
-  //     bookmarked.forEach(b => {
-  //       const initbookmarked = shows.find(s => (s.id === b.id))
-  //       initbookmarked.bookmarked = true;
-  //       console.log(initbookmarked)    
-  //     }); 
-  //   }
-  // }  
  
-
-  // useEffect(() => {
-  
-  // }, [shows])
   
   const handleBookmarkClick = (showId) => {
     const selectedShow = shows.find((s => s.id === showId));
@@ -86,12 +72,11 @@ const Home = () => {
       });
     });
     setBookmarked((prevBookmarked) => {
-      if(prevBookmarked !== null && prevBookmarked.length >=1) {
       return (
         selectedShow.bookmarked ?
-          prevBookmarked.concat(selectedShow) :
+        [...prevBookmarked, selectedShow] :
           prevBookmarked.filter(s => s.id !== selectedShow.id)
-      )};
+      );
     });
   };
 
