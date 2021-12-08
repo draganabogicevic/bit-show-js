@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import ReactPaginate from 'react-paginate';
 
 import Search from "../../components/Search";
 import Card from "../../components/Card";
@@ -10,18 +11,9 @@ import { BookmarkContext } from "../../context/bookmark-context";
 
 import ShowCommunicator from "../../service/ShowCommunicator"
 
-import { Box, SimpleGrid  } from "@chakra-ui/react";
-// import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
-// import {
-//   Pagination,
-//   usePagination,
-//   PaginationNext,
-//   PaginationPage,
-//   PaginationPrevious,
-//   PaginationContainer,
-//   PaginationPageGroup,
-// } from "@ajna/pagination";
-
+import { Box, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
+// @ts-ignore
+import style from "./Home.module.css"
 
 const Home = () => {
   const bookmarkContext = useContext(BookmarkContext);
@@ -30,38 +22,11 @@ const Home = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const searchContext = useContext(SearchContext);
-  
-  // const [pagesQuantity, setPagesQuantity] = useState(0);
-  // const [curPage, setCurPage] = useState(0);
-  // const itemLimit = 9;
+  const [offset, setOffset] = useState(0);
+  const [data, setData] = useState([]);
+  const [pageCount, setPageCount] = useState();
 
-  // const normalStyles = {
-  //   bg: "white",
-  // }
-  // const activeStyles = {
-  //   bg: "blue.300",
-  // }
 
-  // // @ts-ignore
-  // const handlePageChange = (page) => {
-  //   setCurPage(page)
-  // }
-
-  // useEffect(() => {
-  //   const pagesTotal = Math.ceil(shows.length / itemLimit);
-  //   setPagesQuantity(pagesTotal)
-  // }, [shows.length])
-
-  // const isBookmarkedInitially = () => {
-  //   if(bookmarked) {
-  //    if(bookmarked.forEach(s => s.id === show.id)) {
-  //      show.bookmarked = true;
-  //    }
-  //   }
-  // }
-
- 
-  
   const handleBookmarkClick = (showId) => {
     const selectedShow = shows.find((s => s.id === showId));
     console.assert(selectedShow);
@@ -84,7 +49,7 @@ const Home = () => {
     bookmarkContext.bookmarkHandler(bookmarked);
   }, [bookmarked])
   
-  
+ 
   useEffect (() => {
     ShowCommunicator.getAllShows()
     .then(data => {
@@ -94,7 +59,11 @@ const Home = () => {
           initbookmarked.bookmarked = true;   
         }); 
       }
-      setShows(data)
+      setShows(data);
+      const slicedData = data.slice(offset, offset+9)
+      setData(slicedData)
+      // @ts-ignore
+      setPageCount(Math.ceil(data.length / 9))
     })
     .catch(error => {
       setError(error.message);
@@ -102,14 +71,18 @@ const Home = () => {
       setLoading(false);
       }
     )
-  }, []);
- 
+  }, [offset]);
 
+
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setOffset(selectedPage*9);
+  };
   let filteredShows;
   if(searchContext.query !== "") {
     filteredShows = shows.filter(item => item.name.toLowerCase().includes(searchContext.query.toLocaleLowerCase()) || item.rating.average === parseFloat(searchContext.query))
   } else {
-    filteredShows = shows;
+    filteredShows = data;
   }
 
   if(error) {
@@ -120,41 +93,34 @@ const Home = () => {
   }
   return (
     <Box w="70%" m="auto">
+      <div color="white">
+        <ReactPaginate
+          className={style.pagination}
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+        />
+      </div>
       <Search />
       {filteredShows.length !== 0? (
         <SimpleGrid columns={[1, 2, 3]}>
-          {filteredShows.slice(0, 50).map(s => (
+          {filteredShows.map(s => (
           <Box w="100%" key={s.id}>
             <Card 
               show={s}
               onBookmark={handleBookmarkClick}
-              // // @ts-ignore
-              // curPage={curPage} 
-              // itemLimit={itemLimit}
             />
           </Box>
           ))}
         </SimpleGrid>
       ) : <ErrorDisplay message="No matching result" />}
-        {/* <Pagination
-          onPageChange={handlePageChange}
-          // @ts-ignore
-          pagesQuantity={pagesQuantity-1}        
-        >
-          <PaginationPrevious bg="white">
-            <CgChevronLeft />
-          </PaginationPrevious> */}
-          {/* <PaginationPageGroup>
-          {generatePages(pagesQuantity)?.map((page) => (
-              <PaginationPage
-                key={`paginator_page_${page}`}
-                page={page}
-                normalStyles={normalStyles}
-                activeStyles={activeStyles}
-              />
-            ))}
-          </PaginationPageGroup> */}
-        {/* </Pagination> */}
     </Box>
   )
 }

@@ -3,6 +3,7 @@ import { Api } from "../shared/api";
 export const fetchShows = async () => {
   // @ts-ignore
   const response = Api.get();
+  console.log((await response).data)
   return (await response).data;
 }
 
