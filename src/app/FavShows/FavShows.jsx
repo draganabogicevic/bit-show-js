@@ -18,7 +18,7 @@ const FavShows = () => {
   }
   
 
-
+  
   useEffect(() => {
     bookmarkContext.bookmarkHandler(bookmarked)
   }, [bookmarked])
