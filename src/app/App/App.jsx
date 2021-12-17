@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/" element={<Home />}/>
           <Route path="/favShows" element={<FavShows />}/>
           <Route path="/:id" element={<Show />}/>  
-          <Route path="/about" element={<About />}/>
+        <Route path="/about" element={<About />}/>
         </Routes>
       </BookmarkContextProvider>
       <Footer />
