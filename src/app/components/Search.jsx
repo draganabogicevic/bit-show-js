@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useContext } from "react";
 
-import { SearchContext } from "../context/search-context";
+import { SearchContext } from "../../context/search-context";
 
 import { Box, Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";

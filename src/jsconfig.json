@@ -4,7 +4,7 @@
     "target": "es6",
     "checkJs": true,
     "baseUrl": "src",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "exclude": ["node_modules"]
 }

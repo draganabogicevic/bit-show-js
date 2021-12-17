@@ -1,12 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import {Heading, Box, Center, Image, Flex, useColorModeValue, Spacer } from '@chakra-ui/react';
-import { Icon } from "@chakra-ui/react"; 
+import { Icon } from "@chakra-ui/react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
-const FavCard = ({show, onUnBookmark}) => {
+const Card = ({show, onBookmark }) => {
+
   return (
+    
     <Center py={6} mb="50px">
       <Box
         maxW={"270px"}
@@ -23,11 +24,11 @@ const FavCard = ({show, onUnBookmark}) => {
           />
         </Link>  
         <Flex>
-        <Box
-          onClick={() => onUnBookmark(show.id)}
-        >
+          <Box
+            onClick={() => onBookmark(show.id)}
+          >
            {show.bookmarked? <Icon as={BsBookmarkFill}/> : <Icon as={BsBookmark}/>}
-          </Box>
+          </Box> 
           <Spacer />
           <Box
             mt={-3}
@@ -53,4 +54,4 @@ const FavCard = ({show, onUnBookmark}) => {
   );
 }
 
-export default FavCard; 
+export default Card;

@@ -1,18 +1,18 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import ShowCommunicator from "../../service/ShowCommunicator";
-import FallbackUI from "../../components/FallbackUI";
-import Loader from "../../components/Loader";
-import ShowDetails from "../../components/ShowDetails";
-import ShowCrewInGrid from "../../components/ShowCrewInGrid";
-import ShowCrewInListView from "../../components/ShowCrewInListView";
+import ShowCommunicator from '../../service/ShowCommunicator'
+import FallbackUI from '../components/FallbackUI'
+import Loader from '../components/Loader'
+import ShowDetails from '../components/ShowDetails'
+import ShowCrewInGrid from '../components/ShowCrewInGrid'
+import ShowCrewInListView from '../components/ShowCrewInListView'
 
 
-import { Box, Spacer, Flex, List, SimpleGrid } from "@chakra-ui/react";
-import { Icon } from "@chakra-ui/react";
-import { BsFillGrid3X2GapFill, BsListUl } from "react-icons/bs";
+import { Box, Spacer, Flex, List, SimpleGrid } from '@chakra-ui/react'
+import { Icon } from '@chakra-ui/react'
+import { BsFillGrid3X2GapFill, BsListUl } from 'react-icons/bs'
 
 
 const Show = () => {
