@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 
 import BookmarkContextProvider from '../context/bookmark-context'
-import Home from './Shows/ShowsGrid'
-import Show from './Show/Show'
-import About from './About/About'
-import FavShows from './FavShows/FavShows'
+import Home from './shows/ShowsGrid'
+import Show from './show-details/Show'
+import About from './about/About'
+import FavShows from './fawShows/FavShows'
 
 const Main = () => {
   return (

@@ -5,9 +5,9 @@ import { useLocation } from 'react-router-dom'
 import ShowCommunicator from '../../service/ShowCommunicator'
 import FallbackUI from '../components/FallbackUI'
 import Loader from '../components/Loader'
-import ShowDetails from '../components/ShowDetails'
-import ShowCrewInGrid from '../components/ShowCrewInGrid'
-import ShowCrewInListView from '../components/ShowCrewInListView'
+import ShowDetails from './ShowDetails'
+import ShowCrewInGrid from './ShowCrewInGrid'
+import ShowCrewInListView from './ShowCrewInListView'
 
 
 import { Box, Spacer, Flex, List, SimpleGrid } from '@chakra-ui/react'
@@ -16,38 +16,46 @@ import { BsFillGrid3X2GapFill, BsListUl } from 'react-icons/bs'
 
 
 const Show = () => {
-  let location = useLocation();
-  let path = location.pathname;
-  let pathForCrew = path + "/cast";
+  let location = useLocation()
+  let path = location.pathname
+  let pathForCrew = path + '/cast'
 
 
-  const [show, setShow] = useState([]);
-  const [crew, setCrew] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [gridView, setGridView] = useState(true);
+  const [show, setShow] = useState([])
+  const [crew, setCrew] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [gridView, setGridView] = useState(true)
 
-  useEffect(() => {
+  const fetchShow = () => {
     ShowCommunicator.getById(path)
     .then(data => setShow(data))
     .catch(error => {
-      setError(error.message);
+      setError(error.message)
     }).finally(() => {
-      setLoading(false);
+      setLoading(false)
       }
     ) 
-  },[path]);
+  }
 
-  useEffect(() => {
+  const fetchCrew = () => {
     ShowCommunicator.getCrew(pathForCrew)
     .then(data => setCrew(data))
     .catch(error => {
-      setError(error.message);
+      setError(error.message)
     }).finally(() => {
-      setLoading(false);
+      setLoading(false)
       }
     ) 
-  },[pathForCrew]);
+  }
+
+  useEffect(() => {
+    fetchShow()
+  },[path])
+
+  useEffect(() => {
+    fetchCrew()
+  },[pathForCrew])
 
   const toggleView = () => {
     setGridView(!gridView);
@@ -62,11 +70,11 @@ const Show = () => {
   
 
   return (
-    <Box mb="50px">
+    <Box mb='50px'>
       <ShowDetails show={show} />
-      <Box w="70%" m="auto">
-        <Flex mt="20px">
-          <Box fontSize="24px">
+      <Box w='70%' m='auto'>
+        <Flex mt='20px'>
+          <Box fontSize='24px'>
             Actors
           </Box>
           <Spacer />
@@ -84,7 +92,7 @@ const Show = () => {
             ))}
           </SimpleGrid>
         ) : (
-          <Box mt="30px" mb="50px">
+          <Box mt='30px' mb='50px'>
             {crew.map((actor, index) => (
               <List><ShowCrewInListView actor={actor} /></List>
             ))}
@@ -95,4 +103,4 @@ const Show = () => {
   )
 }
 
-export default Show;
+export default Show

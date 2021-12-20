@@ -2,9 +2,9 @@ import { Api } from "../shared/api";
 
 export const fetchShows = async () => {
   // @ts-ignore
-  const response = Api.get();
-  console.log((await response).data)
-  return (await response).data;
+  const {data} =await Api.get();
+  console.log(data)
+  return data;
 }
 
 export const fetchSingleShow = async (path) => {
