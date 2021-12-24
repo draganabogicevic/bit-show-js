@@ -7,18 +7,18 @@ import About from './about/About'
 import FavShows from './fawShows/FavShows'
 
 const Main = () => {
-  return (
-    <main>
-      <BookmarkContextProvider>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/favShows" element={<FavShows />}/>
-          <Route path="/:id" element={<Show />}/>  
-          <Route path="/about" element={<About />}/>
-        </Routes>
-      </BookmarkContextProvider>
-    </main>
-  )
+    return (
+        <main>
+            <BookmarkContextProvider>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/favShows' element={<FavShows />} />
+                    <Route path='/:id' element={<Show />} />
+                    <Route path='/about' element={<About />} />
+                </Routes>
+            </BookmarkContextProvider>
+        </main>
+    )
 }
 
 export default Main

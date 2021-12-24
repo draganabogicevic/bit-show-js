@@ -5,6 +5,8 @@
   "scripts": {
     "start": "react-scripts start",
     "reset": "rm -rf node_modules && npm",
+    "lint": "prettier --check \"src/**/*.{js,jsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -27,12 +29,14 @@
     "react-paginate": "^8.0.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "react-use": "^17.3.1",
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3"
+    "@testing-library/user-event": "^12.8.3",
+    "prettier": "^2.5.1"
   },
   "eslintConfig": {
     "extends": [

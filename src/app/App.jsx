@@ -1,23 +1,21 @@
 import Main from './Main'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer';
-import ErrorBoundary from './components/ErrorBoundary';
+import Footer from './components/Footer'
+import ErrorBoundary from './components/ErrorBoundary'
 
-
-import { ChakraProvider } from "@chakra-ui/react";
-
+import { ChakraProvider } from '@chakra-ui/react'
+import React from 'react'
 
 const App = () => {
-
-  return (
-  <ErrorBoundary>
-    <ChakraProvider>
-      <Navbar />
-      <Main />
-      <Footer />
-    </ChakraProvider>
-  </ErrorBoundary>   
-  );
+    return (
+        <ErrorBoundary>
+            <ChakraProvider>
+                <Navbar />
+                <Main />
+                <Footer />
+            </ChakraProvider>
+        </ErrorBoundary>
+    )
 }
 
-export default App;
+export default App
