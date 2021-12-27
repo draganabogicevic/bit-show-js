@@ -12,17 +12,17 @@ const Navbar = () => {
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <Flex alignItems={'center'}>
                         <Menu>
-                            <Link to='/'>
+                            <Link to="/">
                                 <MenuButton px={4}>BIT SHOW</MenuButton>
                             </Link>
                         </Menu>
                     </Flex>
                     <Flex alignItems={'center'}>
                         <Menu>
-                            <Link to='/favShows'>
-                                <MenuButton px={4}>Favourite Shows</MenuButton>
+                            <Link to="/favShows">
+                                <MenuButton px={4}>Favorite Shows</MenuButton>
                             </Link>
-                            <Link to='/about'>
+                            <Link to="/about">
                                 <MenuButton px={4}>About</MenuButton>
                             </Link>
                             <MenuButton px={4} onClick={toggleColorMode}>
