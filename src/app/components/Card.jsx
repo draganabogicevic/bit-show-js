@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import Show from 'entities/Show'
 
 import { Icon, Heading, Box, Image, Flex, useColorModeValue, Spacer } from '@chakra-ui/react'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
@@ -45,6 +48,11 @@ const Card = ({ show, onBookmark }) => {
             </Heading>
         </Box>
     )
+}
+
+Card.propTypes = {
+    show: PropTypes.objectOf(PropTypes.instanceOf(Show)),
+    onBookmark: PropTypes.func.isRequired
 }
 
 export default Card

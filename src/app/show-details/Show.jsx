@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
+
 import { useApi } from 'hooks/useApi'
 
 import { showCommunicator } from 'service/ShowCommunicator'
@@ -8,6 +9,7 @@ import Loader from 'app/components/Loader'
 import ShowDetails from './ShowDetails'
 import ShowCrewInGrid from './ShowCrewInGrid'
 import ShowCrewInListView from './ShowCrewInListView'
+
 
 import { Box, Spacer, Flex, List, SimpleGrid, Icon } from '@chakra-ui/react'
 import { BsFillGrid3X2GapFill, BsListUl } from 'react-icons/bs'
@@ -74,5 +76,6 @@ const Show = () => {
         </Box>
     )
 }
+
 
 export default Show

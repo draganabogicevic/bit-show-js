@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
+import PropTypes from 'prop-types'
+
+import Show from 'entities/Show'
 
 import { Image, SimpleGrid, Box, Heading, Divider } from '@chakra-ui/react'
 
@@ -16,6 +19,10 @@ const ShowDetails = ({ show }) => {
             <Divider />
         </Box>
     )
+}
+
+ShowDetails.propTypes = {
+    show: PropTypes.objectOf(PropTypes.instanceOf(Show))
 }
 
 export default ShowDetails

@@ -1,12 +1,18 @@
 import React from 'react'
 import { Box, Heading } from '@chakra-ui/layout'
+import PropTypes from 'prop-types'
 
-export default function ErrorDisplay(props) {
-    const msg = props.message ? props.message : 'Error!'
+export default function ErrorDisplay({ message, children }) {
+    const msg = message ? message : 'Error!'
     return (
-        <Box w='70%' m='auto'>
+        <Box w="70%" m="auto">
             <Heading>{msg}</Heading>
-            {props.children}
+            {children}
         </Box>
     )
+}
+
+ErrorDisplay.prototype = {
+    message: PropTypes.string,
+    children: PropTypes.element
 }

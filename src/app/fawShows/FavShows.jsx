@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useBookmarkContext } from 'context/bookmarkContext'
 

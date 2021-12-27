@@ -10,17 +10,17 @@ import React from 'react'
 
 const App = () => {
     return (
-        <ErrorBoundary>
-            <ChakraProvider>
-                <Navbar />
-                <SearchContextProvider>
-                    <BookmarkContextProvider>
+        <ChakraProvider>
+            <Navbar />
+            <SearchContextProvider>
+                <BookmarkContextProvider>
+                    <ErrorBoundary>
                         <Main />
-                    </BookmarkContextProvider>
-                </SearchContextProvider>
-                <Footer />
-            </ChakraProvider>
-        </ErrorBoundary>
+                    </ErrorBoundary>
+                </BookmarkContextProvider>
+            </SearchContextProvider>
+            <Footer />
+        </ChakraProvider>
     )
 }
 
