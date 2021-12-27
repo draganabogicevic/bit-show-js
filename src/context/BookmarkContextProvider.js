@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+// import { useMemo } from 'react'
 import { useUpdateEffect } from 'react-use'
 
 import ShowFromLs from 'entities/ShowFromLs'
@@ -18,6 +19,8 @@ const BookmarkContextProvider = props => {
     const saveToLocalStorage = bookmarked => {
         localStorage.setItem('favShows', JSON.stringify(bookmarked))
     }
+
+    // const saveBookmarked = useMemo(() => saveToLocalStorage(contextBookmarked), [contextBookmarked])
 
     useUpdateEffect(() => saveToLocalStorage(contextBookmarked))
 
