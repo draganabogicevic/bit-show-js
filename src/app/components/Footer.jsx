@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
-// @ts-ignore
 import style from './Footer.module.css'
 
 const Footer = () => {

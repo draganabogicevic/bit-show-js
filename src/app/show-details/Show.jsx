@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useMount } from 'react-use'
+import { useApi } from 'hooks/useApi'
 
-import { showCommunicator } from '../../service/ShowCommunicator'
-import FallbackUI from '../components/FallbackUI'
-import Loader from '../components/Loader'
+import { showCommunicator } from 'service/ShowCommunicator'
+import FallbackUI from 'app/components/Card'
+import Loader from 'app/components/Loader'
 import ShowDetails from './ShowDetails'
 import ShowCrewInGrid from './ShowCrewInGrid'
 import ShowCrewInListView from './ShowCrewInListView'
@@ -17,61 +17,33 @@ const Show = () => {
     let path = location.pathname
     let pathForCrew = path + '/cast'
 
-    const [show, setShow] = useState([])
-    const [crew, setCrew] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState('')
+    const { data: show, loading, error } = useApi(showCommunicator.getById, path)
+
+    const {
+        data: crew,
+        loading: loadingCrew,
+        error: errorFromCrew
+    } = useApi(showCommunicator.getCrew, pathForCrew)
+
     const [gridView, setGridView] = useState(true)
-
-    const fetchShow = () => {
-        showCommunicator
-            .getById(path)
-            .then(data => setShow(data))
-            .catch(error => {
-                setError(error.message)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }
-
-    const fetchCrew = () => {
-        showCommunicator
-            .getCrew(pathForCrew)
-            .then(data => setCrew(data))
-            .catch(error => {
-                setError(error.message)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }
-
-    useMount(() => {
-        fetchShow()
-    })
-
-    useMount(() => {
-        fetchCrew()
-    })
 
     const toggleView = () => {
         setGridView(!gridView)
     }
 
-    if (error) {
+    if (error || errorFromCrew) {
         return <FallbackUI message={error} />
     }
-    if (loading) {
+    if (loading || loadingCrew) {
         return <Loader />
     }
 
     return (
-        <Box mb='50px'>
+        <Box mb="50px">
             <ShowDetails show={show} />
-            <Box w='70%' m='auto'>
-                <Flex mt='20px'>
-                    <Box fontSize='24px'>Actors</Box>
+            <Box w="70%" m="auto">
+                <Flex mt="20px">
+                    <Box fontSize="24px">Actors</Box>
                     <Spacer />
                     <Box>
                         {gridView ? (
@@ -90,10 +62,10 @@ const Show = () => {
                         ))}
                     </SimpleGrid>
                 ) : (
-                    <Box mt='30px' mb='50px'>
+                    <Box mt="30px" mb="50px">
                         {crew.map((actor, index) => (
                             <List>
-                                <ShowCrewInListView actor={actor} />
+                                <ShowCrewInListView actor={actor} index={index} />
                             </List>
                         ))}
                     </Box>

@@ -13,8 +13,7 @@ const Card = ({ show, onBookmark }) => {
             bg={useColorModeValue('gray.100', 'gray.800')}
             boxShadow={'2xl'}
             rounded={'md'}
-            overflow={'hidden'}
-        >
+            overflow={'hidden'}>
             <Link to={`/${show.id}`}>
                 <Image w={'full'} src={show.image.medium} objectFit={'cover'} />
             </Link>
@@ -26,14 +25,13 @@ const Card = ({ show, onBookmark }) => {
                 <Box
                     mt={-3}
                     mr={30}
-                    textAlign='center'
-                    width='40px'
+                    textAlign="center"
+                    width="40px"
                     css={{
                         border: '2px solid white'
                     }}
-                    borderRadius='full'
-                    bg={useColorModeValue('gray.100', 'gray.800')}
-                >
+                    borderRadius="full"
+                    bg={useColorModeValue('gray.100', 'gray.800')}>
                     {show.rating}
                 </Box>
             </Flex>
@@ -42,8 +40,7 @@ const Card = ({ show, onBookmark }) => {
                 fontSize={'2xl'}
                 fontWeight={500}
                 fontFamily={'body'}
-                textAlign='center'
-            >
+                textAlign="center">
                 {show.truncatedTitle}
             </Heading>
         </Box>

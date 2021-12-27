@@ -1,4 +1,4 @@
-import { Api } from '../shared/api'
+import { Api } from 'shared/api'
 
 export const fetchShows = async () => {
     const { data } = await Api.get('/shows')

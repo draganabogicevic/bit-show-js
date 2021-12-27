@@ -1,6 +1,6 @@
 import { fetchShows, fetchSingleShow, fetchShowCrew } from './service'
-import Show from '../entities/Show'
-import ShowCrew from '../entities/ShowCrew'
+import Show from 'entities/Show'
+import ShowCrew from 'entities/ShowCrew'
 
 class ShowCommunicator {
     getAllShows() {

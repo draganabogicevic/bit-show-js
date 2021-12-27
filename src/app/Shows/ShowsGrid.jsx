@@ -1,23 +1,23 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { useUpdateEffect, useMount } from 'react-use'
 
-import Search from '../components/Search'
-import Card from '../components/Card'
-import Loader from '../components/Loader'
-import ErrorDisplay from '../components/ErrorDisplay'
-import FallbackUI from '../components/FallbackUI'
-import Paginate from '../components/Paginate'
-import { SearchContext } from '../../context/search-context'
-import { BookmarkContext } from '../../context/bookmark-context'
+import Search from 'app/components/Search'
+import Card from 'app/components/Card'
+import Loader from 'app/components/Loader'
+import ErrorDisplay from 'app/components/ErrorDisplay'
+import FallbackUI from 'app/components/FallbackUI'
+import Paginate from 'app/components/Paginate'
+import { useSearchContext } from 'context/searchContext'
+import { useBookmarkContext } from 'context/bookmarkContext'
 
-import { showCommunicator } from '../../service/ShowCommunicator'
+import { showCommunicator } from 'service/ShowCommunicator'
 
 import { Box, SimpleGrid } from '@chakra-ui/react'
 
 const ShowsGrid = () => {
-    const bookmarkContext = useContext(BookmarkContext)
-    const searchContext = useContext(SearchContext)
-    const [bookmarked, setBookmarked] = useState(bookmarkContext.bookmarked)
+    const { bookmarkHandler, contextBookmarked } = useBookmarkContext()
+    const { query } = useSearchContext()
+    const [bookmarked, setBookmarked] = useState(contextBookmarked)
     const [shows, setShows] = useState([])
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
@@ -40,10 +40,6 @@ const ShowsGrid = () => {
         })
     }
 
-    useUpdateEffect(() => {
-        bookmarkContext.bookmarkHandler(bookmarked)
-    }, [bookmarkContext, bookmarked])
-
     const fetchShows = () => {
         showCommunicator
             .getAllShows()
@@ -56,6 +52,7 @@ const ShowsGrid = () => {
                     })
                 }
                 setShows(data)
+                console.log(data)
                 setData(data)
                 setPageCount(Math.ceil(data.length / 9))
             })
@@ -85,12 +82,16 @@ const ShowsGrid = () => {
         showOtherPages()
     }, [offset])
 
+    useUpdateEffect(() => {
+        bookmarkHandler(bookmarked)
+    }, [bookmarked])
+
     let filteredShows
-    if (searchContext.query !== '') {
+    if (query !== '') {
         filteredShows = shows.filter(
             item =>
-                item.name.toLowerCase().includes(searchContext.query.toLocaleLowerCase()) ||
-                item.rating === parseFloat(searchContext.query)
+                item.name.toLowerCase().includes(query.toLocaleLowerCase()) ||
+                item.rating === parseFloat(query)
         )
     } else {
         filteredShows = data.slice(0, 9)

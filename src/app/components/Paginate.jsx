@@ -1,7 +1,6 @@
 import ReactPaginate from 'react-paginate'
 
-// @ts-ignore
-import style from '../components/Paginate.module.css'
+import style from './Paginate.module.css'
 
 const Paginate = ({ pageCount, onPageClick }) => {
     return (
