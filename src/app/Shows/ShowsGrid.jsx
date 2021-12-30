@@ -36,7 +36,6 @@ const ShowsGrid = () => {
                     })
                 }
                 setShows(data)
-                console.log(data)
                 setData(data)
                 // @ts-ignore
                 setPageCount(Math.ceil(data.length / 9))

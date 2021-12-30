@@ -14,7 +14,6 @@ const BookmarkContextProvider = props => {
     const [bookmarkedShows, setBookmarkedShows] = useState(getShowsFromLocalStorage())
     const bookmarkHandler = show => {
         setBookmarkedShows(prevBookmarked => {
-            console.log(show.bookmarked)
             return show.bookmarked
                 ? [...prevBookmarked, show]
                 : prevBookmarked.filter(s => s.id !== show.id)

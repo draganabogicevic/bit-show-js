@@ -1,7 +1,7 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
-// import ShowCrew from 'entities/ShowCrew'
+import ShowCrew from 'entities/ShowCrew'
 
 import { ListItem, Avatar, Box } from '@chakra-ui/react'
 
@@ -14,8 +14,8 @@ const ShowCrewInListView = ({ actor, index }) => {
     )
 }
 
-// ShowCrewInListView.propTypes = {
-//     actor: PropTypes.objectOf(PropTypes.instanceOf(ShowCrew)),
-//     index: PropTypes.number
-// }
+ShowCrewInListView.propTypes = {
+    actor: PropTypes.instanceOf(ShowCrew),
+    index: PropTypes.number
+}
 export default ShowCrewInListView

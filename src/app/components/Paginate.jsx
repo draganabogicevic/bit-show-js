@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
+import PropTypes from 'prop-types'
 
 import style from './Paginate.module.css'
 
@@ -21,4 +22,8 @@ const Paginate = ({ pageCount, onPageClick }) => {
     )
 }
 
+Paginate.propTypes = {
+    pageCount: PropTypes.number,
+    onPageClick: PropTypes.func
+}
 export default Paginate

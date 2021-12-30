@@ -1,7 +1,7 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
-// import ShowCrew from 'entities/ShowCrew'
+import ShowCrew from 'entities/ShowCrew'
 
 import { Box, Image, Text, useColorModeValue } from '@chakra-ui/react'
 
@@ -23,8 +23,8 @@ const ShowCrewInGrid = ({ actor }) => {
     )
 }
 
-// ShowCrewInGrid.propTypes = {
-//     actor: PropTypes.objectOf(PropTypes.instanceOf(ShowCrew))
-// }
+ShowCrewInGrid.propTypes = {
+    actor: PropTypes.instanceOf(ShowCrew)
+}
 
 export default ShowCrewInGrid

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Heading } from '@chakra-ui/layout'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 export default function ErrorDisplay({ message, children }) {
     const msg = message ? message : 'Error!'
@@ -12,7 +12,7 @@ export default function ErrorDisplay({ message, children }) {
     )
 }
 
-// ErrorDisplay.prototype = {
-//     message: PropTypes.string,
-//     children: PropTypes.element
-// }
+ErrorDisplay.prototype = {
+    message: PropTypes.string,
+    children: PropTypes.element
+}

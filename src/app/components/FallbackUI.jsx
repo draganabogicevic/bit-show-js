@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { Box, Heading, Button } from '@chakra-ui/react'
 
@@ -23,8 +23,8 @@ const FallbackUI = ({ error }) => {
     )
 }
 
-// FallbackUI.propTypes = {
-//     error: PropTypes.string
-// }
+FallbackUI.propTypes = {
+    error: PropTypes.string
+}
 
 export default FallbackUI
