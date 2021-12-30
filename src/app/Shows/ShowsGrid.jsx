@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useUpdateEffect, useMount } from 'react-use'
+import React, { useState, useEffect } from 'react'
 
 import Search from 'app/components/Search'
 import Card from 'app/components/Card'
@@ -15,30 +14,16 @@ import { showCommunicator } from 'service/ShowCommunicator'
 import { Box, SimpleGrid } from '@chakra-ui/react'
 
 const ShowsGrid = () => {
-    const { bookmarkHandler, contextBookmarked } = useBookmarkContext()
+    // @ts-ignore
+    const { bookmarkedShows } = useBookmarkContext()
     const { query } = useSearchContext()
-    const [bookmarked, setBookmarked] = useState(contextBookmarked)
+    const [bookmarked, setBookmarked] = useState(bookmarkedShows)
     const [shows, setShows] = useState([])
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
     const [offset, setOffset] = useState(0)
     const [data, setData] = useState([])
     const [pageCount, setPageCount] = useState()
-
-    const handleBookmarkClick = showId => {
-        const selectedShow = shows.find(s => s.id === showId)
-        selectedShow.toggleBookmark()
-        setShows(prevShows => {
-            return prevShows.map(s => {
-                return s.id === showId ? selectedShow : s
-            })
-        })
-        setBookmarked(prevBookmarked => {
-            return selectedShow.bookmarked
-                ? [...prevBookmarked, selectedShow]
-                : prevBookmarked.filter(s => s.id !== selectedShow.id)
-        })
-    }
 
     const fetchShows = () => {
         showCommunicator
@@ -47,13 +32,13 @@ const ShowsGrid = () => {
                 if (bookmarked) {
                     bookmarked.forEach(b => {
                         const initbookmarked = data.find(s => s.id === b.id)
-                        console.log('initbookmarked: ', initbookmarked)
                         initbookmarked.bookmarked = true
                     })
                 }
                 setShows(data)
                 console.log(data)
                 setData(data)
+                // @ts-ignore
                 setPageCount(Math.ceil(data.length / 9))
             })
             .catch(error => {
@@ -74,17 +59,13 @@ const ShowsGrid = () => {
         setOffset(selectedPage * 9)
     }
 
-    useMount(() => {
+    useEffect(() => {
         fetchShows()
-    })
+    }, [])
 
-    useUpdateEffect(() => {
+    useEffect(() => {
         showOtherPages()
     }, [offset])
-
-    useUpdateEffect(() => {
-        bookmarkHandler(bookmarked)
-    }, [bookmarked])
 
     let filteredShows
     if (query !== '') {
@@ -98,6 +79,7 @@ const ShowsGrid = () => {
     }
 
     if (error) {
+        // @ts-ignore
         return <FallbackUI message={error} />
     }
 
@@ -105,17 +87,18 @@ const ShowsGrid = () => {
         return <Loader />
     }
     return (
-        <Box w="70%" m="auto" mb={10}>
+        <Box w='70%' m='auto' mb={10}>
             <Paginate onPageClick={handlePageClick} pageCount={pageCount} />
             <Search />
             {filteredShows.length !== 0 ? (
                 <SimpleGrid columns={[1, 2, 3]}>
                     {filteredShows.map(s => (
-                        <Card show={s} onBookmark={handleBookmarkClick} key={s.id} />
+                        <Card show={s} key={s.id} />
                     ))}
                 </SimpleGrid>
             ) : (
-                <ErrorDisplay message="No matching result" />
+                // @ts-ignore
+                <ErrorDisplay message='No matching result' />
             )}
         </Box>
     )

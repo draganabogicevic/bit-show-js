@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useUpdateEffect } from 'react-use'
+import React, { useState, useEffect } from 'react'
 import { useBookmarkContext } from 'context/bookmarkContext'
 
 import Card from 'app/components/Card'
@@ -8,33 +7,27 @@ import ErrorDisplay from 'app/components/ErrorDisplay'
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react'
 
 const FavShows = () => {
-    const { bookmarkHandler, contextBookmarked } = useBookmarkContext()
-    const [bookmarked, setBookmarked] = useState(contextBookmarked)
-
-    const handleUnBookmark = showId => {
-        const selectedShow = bookmarked.find(s => s.id === showId)
-        setBookmarked(prevBookmarked => {
-            return prevBookmarked.filter(s => s.id !== selectedShow.id)
-        })
-    }
-
-    useUpdateEffect(() => {
-        bookmarkHandler(bookmarked)
-    }, [bookmarked])
+    // @ts-ignore
+    const { bookmarkedShows } = useBookmarkContext()
+    const [bookmarked, setBookmarked] = useState(bookmarkedShows)
+    useEffect(() => {
+        setBookmarked(bookmarkedShows)
+    }, [bookmarkedShows])
 
     return (
-        <Box w="70%" m="auto">
-            <Heading my="30px">My favorite</Heading>
+        <Box w='70%' m='auto'>
+            <Heading my='30px'>My favorite</Heading>
             {bookmarked !== null && bookmarked.length >= 1 ? (
                 <SimpleGrid columns={[1, 2, 3]}>
                     {bookmarked.map((s, index) => (
-                        <Box w="100%" key={index}>
-                            <Card show={s} key={s.id} onBookmark={handleUnBookmark} />
+                        <Box w='100%' key={index}>
+                            <Card show={s} key={s.id} />
                         </Box>
                     ))}
                 </SimpleGrid>
             ) : (
-                <ErrorDisplay message="No selected favorite shows jet" />
+                // @ts-ignore
+                <ErrorDisplay message='No selected favorite shows jet' />
             )}
         </Box>
     )

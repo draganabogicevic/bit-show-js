@@ -1,3 +1,4 @@
+import React from 'react'
 import { Heading, Box } from '@chakra-ui/react'
 
 const About = () => {

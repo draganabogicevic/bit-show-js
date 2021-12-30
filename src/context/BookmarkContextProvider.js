@@ -1,37 +1,43 @@
-import React, { useState } from 'react'
-// import { useMemo } from 'react'
-import { useUpdateEffect } from 'react-use'
+import React, { useState, useEffect } from 'react'
 
 import ShowFromLs from 'entities/ShowFromLs'
 import { BookmarkContext } from './bookmarkContext'
 
-const BookmarkContextProvider = props => {
-    const [contextBookmarked, setContextBookmarked] = useState(() => {
-        const dataFromLS = JSON.parse(localStorage.getItem('favShows'))
-        const previousBookmarked = dataFromLS.map(s => new ShowFromLs(s))
-        return previousBookmarked ? previousBookmarked : []
-    })
+const getShowsFromLocalStorage = () => {
+    const dataFromLs = JSON.parse(localStorage.getItem('favShows'))
+    let prevBookmarked
+    dataFromLs ? (prevBookmarked = dataFromLs.map(s => new ShowFromLs(s))) : (prevBookmarked = [])
+    return prevBookmarked
+}
 
-    const bookmarkHandler = items => {
-        setContextBookmarked(items)
+const BookmarkContextProvider = props => {
+    const [bookmarkedShows, setBookmarkedShows] = useState(getShowsFromLocalStorage())
+    const bookmarkHandler = show => {
+        setBookmarkedShows(prevBookmarked => {
+            console.log(show.bookmarked)
+            return show.bookmarked
+                ? [...prevBookmarked, show]
+                : prevBookmarked.filter(s => s.id !== show.id)
+        })
     }
 
     const saveToLocalStorage = bookmarked => {
         localStorage.setItem('favShows', JSON.stringify(bookmarked))
     }
 
-    // const saveBookmarked = useMemo(() => saveToLocalStorage(contextBookmarked), [contextBookmarked])
-
-    useUpdateEffect(() => saveToLocalStorage(contextBookmarked))
+    useEffect(() => saveToLocalStorage(bookmarkedShows), [bookmarkedShows])
 
     const bookmarkContextValue = {
-        contextBookmarked,
+        bookmarkedShows,
         bookmarkHandler,
         saveToLocalStorage
     }
 
     return (
-        <BookmarkContext.Provider value={bookmarkContextValue}>
+        <BookmarkContext.Provider
+            // @ts-ignore
+            value={bookmarkContextValue}
+        >
             {props.children}
         </BookmarkContext.Provider>
     )

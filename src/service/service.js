@@ -6,11 +6,11 @@ export const fetchShows = async () => {
 }
 
 export const fetchSingleShow = async path => {
-    const response = Api.get('/shows' + path)
+    const response = Api.get('/shows/' + path)
     return (await response).data
 }
 
 export const fetchShowCrew = async path => {
-    const response = Api.get('/shows' + path)
+    const response = Api.get('/shows/' + path)
     return (await response).data
 }

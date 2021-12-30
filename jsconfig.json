@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "lib": ["dom", "esnext"],
-        "jsx": "react",
-        "target": "ES6",
+        "jsx": "react-jsx",
+        "target": "ES5",
         "checkJs": true,
         "baseUrl": "src",
         "moduleResolution": "node"

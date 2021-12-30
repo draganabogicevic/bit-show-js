@@ -11,17 +11,18 @@ const Search = () => {
 
     const searchQueryHandler = query => {
         setSearchQuery(query)
+        // @ts-ignore
         searchHandler(query)
     }
 
     return (
-        <Box my="30px">
+        <Box my='30px'>
             <InputGroup>
                 <InputLeftAddon children={<SearchIcon />} />
                 <Input
                     value={searchQuery}
-                    type="text"
-                    placeholder="search for the show"
+                    type='text'
+                    placeholder='search for the show'
                     onChange={e => {
                         searchQueryHandler(e.target.value)
                     }}

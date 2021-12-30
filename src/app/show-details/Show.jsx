@@ -1,5 +1,6 @@
+import React from 'react'
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { useApi } from 'hooks/useApi'
 
@@ -10,22 +11,24 @@ import ShowDetails from './ShowDetails'
 import ShowCrewInGrid from './ShowCrewInGrid'
 import ShowCrewInListView from './ShowCrewInListView'
 
-
 import { Box, Spacer, Flex, List, SimpleGrid, Icon } from '@chakra-ui/react'
 import { BsFillGrid3X2GapFill, BsListUl } from 'react-icons/bs'
 
 const Show = () => {
-    let location = useLocation()
-    let path = location.pathname
-    let pathForCrew = path + '/cast'
+    // let location = useLocation()
+    // let path = location.pathname
+    // @ts-ignore
+    const { id } = useParams()
+    console.log('id', id)
+    let idCrew = id + '/cast'
 
-    const { data: show, loading, error } = useApi(showCommunicator.getById, path)
+    const { data: show, loading, error } = useApi(showCommunicator.getById, id)
 
     const {
         data: crew,
         loading: loadingCrew,
         error: errorFromCrew
-    } = useApi(showCommunicator.getCrew, pathForCrew)
+    } = useApi(showCommunicator.getCrew, idCrew)
 
     const [gridView, setGridView] = useState(true)
 
@@ -34,18 +37,19 @@ const Show = () => {
     }
 
     if (error || errorFromCrew) {
-        return <FallbackUI message={error} />
+        // @ts-ignore
+        return <FallbackUI message={error || errorFromCrew} />
     }
     if (loading || loadingCrew) {
         return <Loader />
     }
 
     return (
-        <Box mb="50px">
+        <Box mb='50px'>
             <ShowDetails show={show} />
-            <Box w="70%" m="auto">
-                <Flex mt="20px">
-                    <Box fontSize="24px">Actors</Box>
+            <Box w='70%' m='auto'>
+                <Flex mt='20px'>
+                    <Box fontSize='24px'>Actors</Box>
                     <Spacer />
                     <Box>
                         {gridView ? (
@@ -64,7 +68,7 @@ const Show = () => {
                         ))}
                     </SimpleGrid>
                 ) : (
-                    <Box mt="30px" mb="50px">
+                    <Box mt='30px' mb='50px'>
                         {crew.map((actor, index) => (
                             <List>
                                 <ShowCrewInListView actor={actor} index={index} />
@@ -76,6 +80,5 @@ const Show = () => {
         </Box>
     )
 }
-
 
 export default Show

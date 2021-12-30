@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactPaginate from 'react-paginate'
 
 import style from './Paginate.module.css'
