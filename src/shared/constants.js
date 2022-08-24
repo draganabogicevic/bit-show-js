@@ -1,1 +1,0 @@
-export const BASE_API_ENDPOINT = "https://api.tvmaze.com/shows";
